@@ -1,14 +1,17 @@
 window.dialog=function(options){
     // 析构赋值
     let {title,content,buttons} = options
-    let $div = generateHtml()
+    
     
     let api={       
         close:function(){
 
-            $div.hide()     //  don't use hide() ,ues remove()
-        }        
+            $div.remove()     //  don't use hide() ,ues remove()
+            
+        } 
+              
     }
+    let $div = generateHtml()
     
     $(document.body).append($div)
     return api
@@ -19,31 +22,49 @@ window.dialog=function(options){
         let $title = $('<div class="dialog-title"></div>')
         let $content = $('<div class="dialog-content"></div>')
         let $buttons = $('<div class="dialog-action"></div>')
+        let $close = $('<a class="close" href="#"></a>')
+
+        
         $title.text(title).appendTo($div)
         $content.text(content).appendTo($div)
+        $close.text('×').appendTo($title)
+        // $close.on('click',api.close)
+        $close.on('click',function(e){
+            api.close()
+            e.stopPropagation()
+        })
         
         for(let i=0;i<buttons.length;i++){
             let creatButton = $('<button></button>')
             creatButton.text(buttons[i].text).appendTo($buttons)
-            .on('click',function(){
+            .on('click',function(e){
                 let action = buttons[i].action
                 let result = action && action()
                 result !== false && api.close()
+                e.stopPropagation()
             })
             
         }
+
         $buttons.appendTo($div)
-
         $div.appendTo($divWrapper)
+        
+        $div.on('click',function(e){
+            e.stopPropagation()
+        })
 
+        $divWrapper.on('click',function(e){
+            api.close()
+        })
         return $divWrapper
-    }   
+    }
+
 
 }
 
+let button = $('.button')[0]
 
-button.onclick=function(){   //  有个问题，如果用户多次点击页面的按钮，页面中会创建多个div的标签，我认为这样不好
-                            //  可以通过每次点击关闭按钮的是个删除标签 就好了
+button.onclick=function(){   //  
     let api = dialog({
         title: '标题',
         content: 'Aenean lacinia bibendum nulla sed consectetur.\
@@ -64,4 +85,5 @@ button.onclick=function(){   //  有个问题，如果用户多次点击页面�
         ]
 
     }) 
+    
 }
