@@ -1,0 +1,78 @@
+.dialog-button{
+    margin-top: 30px;
+}
+.dialog-button label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 31px;
+    background: linear-gradient(to bottom,#e3dfde,#E3DFD4);
+    border-radius: 3px;
+    float: left;
+    margin-right: 8px;
+
+}
+.dialog-button div{
+    width: 72px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7d8383;
+    font-size: 12px;
+    background: linear-gradient(to bottom,#fbfaf4,#ece8e6);
+    box-shadow: 0 2px 3px #cbc9c4;
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none;
+    
+}
+.dialog-button input:checked + div{
+    background: #fbfbf9;
+}
+.hidden{
+    display: none;
+}
+
+
+
+.dialog-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: hsla(0,0%,0%,0.5);
+    justify-content: center;
+    align-items: center;
+}
+.dialog{
+    max-width: 600px;
+    background: #fff;
+    
+    
+}
+
+.dialog-title{
+    line-height: 32px;
+    border-bottom: 1px solid #ccc;
+}
+.dialog-content{
+    padding: 10px;
+}
+.dialog-action{
+
+}
+.dialog-action > button{
+    padding: 5px 10px;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+}
